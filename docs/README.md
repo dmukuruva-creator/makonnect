@@ -44,7 +44,7 @@ Coding work lives in [DEV_TASKBOARD.md](./DEV_TASKBOARD.md); everything needing 
 ```
 █████████████████░░░  ~85%
 ```
-Built and **deployed live** at **[makonnect.vercel.app](https://makonnect.vercel.app)** (public). Remaining: fix the deploy pipeline (production is stale; the branch alias is auth-walled) + transfer to org-owned accounts. See "Immediate next" below.
+Built and **deployed live** at **[makonnect.vercel.app](https://makonnect.vercel.app)** (public, serving current `main`). Remaining: standardise on the public URL (the `-git-main-` alias is auth-walled) + transfer to org-owned accounts. See "Immediate next" below.
 
 **Full platform (entire §5 roadmap)**
 ```
@@ -56,7 +56,7 @@ The hard, high-value phases (auth, real data, mentorship, donations) haven't sta
 
 | Phase | What it is | Status |
 |---|---|---|
-| **−2 · Ship a URL solo** | Working slice + live URL | 🚧 `██████████████████░░` Live & public at `makonnect.vercel.app`; **prod stale + branch alias auth-walled** — fix [D1](./DEV_TASKBOARD.md) |
+| **−2 · Ship a URL solo** | Working slice + live URL | 🚧 `██████████████████░░` Live & public at `makonnect.vercel.app` (current); **share the public URL** — the `-git-main-` alias is auth-walled ([D1](./DEV_TASKBOARD.md)) |
 | **−1 · Validate + scaffolding** | User research; CI; CONTRIBUTING/SECURITY/CODEOWNERS; appoint DSL & approvers | 🚧 `██████░░░░░░░░░░░░░░` CI + tests done; research, governance docs & appointments pending |
 | **0 · Foundations + safeguarding** | Design tokens, auth, roles, age-gating/consent, audit log, PWA shell | 🚧 `███████░░░░░░░░░░░░░` Tokens + PWA + safeguarding *data model* done; **auth/roles/consent not started** |
 | **1 · Knowledge + directory (real v1)** | Claim onboarding, profiles+timeline, directory, Resources Hub, safeguarding console; then real-data import | 🚧 `█████████░░░░░░░░░░░` Directory/profiles/resources/PWA built on synthetic data; onboarding, admin/console & real-data import pending |
@@ -71,7 +71,7 @@ The hard, high-value phases (auth, real data, mentorship, donations) haven't sta
 Home + hero · searchable/filterable **directory** · **profiles** with journey timeline · **Resources Hub** (list + article) · **PWA** (manifest + cache-first service worker) · safeguarding enforced in the type/data layer (minors are family-only and never directory-visible; no aid fields in the public model) · unit tests (data integrity + safeguarding) + Playwright e2e (directory, resources, safeguarding, navigation, mobile) · CI workflow. Detail per feature: [FEATURE_SPECS.md](./FEATURE_SPECS.md).
 
 ### Immediate next (unblocks the demo)
-1. **Fix the live deployment** — production is stale and the shared `-git-main-` URL is auth-walled; standardise on the public `makonnect.vercel.app` — [DEV_TASKBOARD → D1](./DEV_TASKBOARD.md).
+1. **Standardise on the public URL** — the shared `-git-main-` alias is auth-walled; use `makonnect.vercel.app` everywhere — [DEV_TASKBOARD → D1](./DEV_TASKBOARD.md). *(Browser-staleness from the old service worker is now fixed.)*
 2. **Transfer repo + accounts to a Makomborero org** — [CONSULT §1](./CONSULT.md).
 3. **Appoint the DSL and the co-approval bodies** — [CONSULT §2](./CONSULT.md).
 4. **Run the user-research round** (~5 students + ~5 alumni) — gates building past v1 ([CONSULT §6](./CONSULT.md)).

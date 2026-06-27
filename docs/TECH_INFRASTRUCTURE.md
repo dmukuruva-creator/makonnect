@@ -82,12 +82,14 @@ SUPABASE_SERVICE_ROLE_KEY=         # SERVER-ONLY — bypasses RLS, never prefix 
 
 | URL | Use | Status |
 |---|---|---|
-| **`https://makonnect.vercel.app`** | The **public, shareable** demo — give this one to staff/collaborators/testers | ✅ public, ⚠️ **currently stale** (see below) |
+| **`https://makonnect.vercel.app`** | The **public, shareable** demo — give this one to staff/collaborators/testers | ✅ public, serving current `main` |
 | `https://makonnect-git-main-…vercel.app` | Vercel's per-branch alias for `main` | ⛔ **behind Vercel Authentication** — not publicly viewable; don't share it |
 
-**Two deployment issues to fix (Vercel dashboard — not code):**
-1. **Share the right URL.** The branch alias (`…-git-main-…`) sits behind Vercel **Deployment Protection** and redirects to a Vercel login, so none of the four audiences can open it. The canonical public URL is **`makonnect.vercel.app`** — use that everywhere.
-2. **Production is stale.** `makonnect.vercel.app` is not serving the latest `main` (e.g. an unknown profile id returns `200` instead of the `404` the current code produces via `notFound()`). Fix the production deploy so it auto-updates from `main` (check Vercel → Settings → Git production branch + auto-deploy, and Settings → Deployment Protection). Tracked as [DEV_TASKBOARD → D1](./DEV_TASKBOARD.md).
+**Known issues:**
+1. **Share the right URL.** The branch alias (`…-git-main-…`) sits behind Vercel **Deployment Protection** and redirects to a Vercel login, so none of the four audiences can open it. The canonical public URL is **`makonnect.vercel.app`** — use that everywhere. Tracked as [DEV_TASKBOARD → D1](./DEV_TASKBOARD.md).
+2. **Stale-in-browser (fixed).** Returning visitors saw an old shell because the previous service worker was **cache-first with a fixed cache key** — it served cached pages and never refetched updates. The *server* was never stale (a `curl`, which runs no service worker, always returned current code). Fixed by switching `public/sw.js` to **network-first + a bumped cache version** (`makonnect-v2`): fresh HTML when online, offline reads kept as a fallback, and the old cache purged so stuck browsers self-heal on next visit.
+
+> Minor (not staleness): an unknown profile id returns HTTP `200` while rendering the not-found UI — a Next.js status-code quirk for `notFound()` on an on-demand SSG param. Cosmetic/SEO only.
 
 ## CI/CD
 
@@ -102,7 +104,7 @@ Everything must be **org-owned, never personal**, so nothing is lost when a cont
 | Account | Status | Owner |
 |---|---|---|
 | GitHub repo | ⏳ `github.com/dmukuruva-creator/makonnect` (personal) — **transfer to a Makomborero org** | leadership + lead builder |
-| Vercel project | 🚧 deployed & public at `makonnect.vercel.app`, but on a **personal** account + production stale + branch alias auth-walled (see Live deployment) — fix & move to org | restricted tier |
+| Vercel project | 🚧 deployed & public at `makonnect.vercel.app` (current `main`), but on a **personal** account + branch alias auth-walled (see Live deployment) — move to org | restricted tier |
 | Supabase project | ⏳ pending — create under an **org** account at the deployment phase | restricted tier |
 | Domain | ⏳ pending — org-owned; someone must own year-two renewal | leadership ([CONSULT §8](./CONSULT.md)) |
 | Secret store | ⏳ pending — org-owned, not a personal `.env` | restricted tier |
