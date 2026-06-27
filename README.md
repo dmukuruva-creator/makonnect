@@ -21,7 +21,7 @@ pipeline works end-to-end — **with no real minors' data involved, by design.**
 - **Directory** — searchable, filterable list of alumni & staff who offer mentorship.
 - **Profiles** — bio + journey timeline for each member.
 - **Resources Hub** — static, offline-readable alumni advice (college apps, finances, networking, relationships).
-- **PWA** — installable, with a web manifest (cache-first offline reads land next).
+- **PWA** — installable, with a web manifest and a cache-first service worker (offline reads; no write-queue in v1).
 
 ## Safeguarding, built in
 
