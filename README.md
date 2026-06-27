@@ -11,13 +11,15 @@ This repo is the **deployable artifact**: a live v1 slice running on **synthetic
 (fake) data**. It shows the look, the core "find an alum" loop, and that the
 pipeline works end-to-end — **with no real minors' data involved, by design.**
 
-> New here? Read **[HANDOFF.md](./HANDOFF.md)** first (orientation for
-> developers, MakoZim staff, legal/compliance and stakeholders), then
-> **[PROJECT_DESCRIPTION.md](./PROJECT_DESCRIPTION.md)** (full plan) and
-> **[TASK_LIST.md](./TASK_LIST.md)** (non-coding work & risks).
-> How we coordinate: **[COMMUNICATIONS.md](./COMMUNICATIONS.md)** (progress
-> reporting & the official channel) + the fortnightly
-> [progress-report template](./templates/progress-report.md).
+> **🔗 Live demo: [makonnect.vercel.app](https://makonnect.vercel.app)** — the public,
+> shareable URL. (Vercel's per-branch `…-git-main-…` alias is behind login — don't
+> share that one. Deploy status & known issues: [docs/TECH_INFRASTRUCTURE.md](./docs/TECH_INFRASTRUCTURE.md#live-deployment).)
+
+> **New here?** Read **[PROJECT_DESCRIPTION.md](./PROJECT_DESCRIPTION.md)** for the
+> full plan (vision, safeguarding, stack, phases). The team's working docs —
+> progress bar, tech infrastructure, feature specs, dev task board, and the
+> approvals/questions to confirm with everyone — live in **[docs/](./docs/)**;
+> start at **[docs/README.md](./docs/README.md)**.
 
 ## What's in v1
 
@@ -36,7 +38,7 @@ foundation. Already enforced in this slice:
 - **Economic-vulnerability / aid status is staff-only** — it isn't even modelled into public-facing types.
 - All development uses **synthetic data**; real records are imported by MakoZim staff only at the deployment phase.
 
-## Tech stack (decided — see HANDOFF §A)
+## Tech stack (decided — see [docs/TECH_INFRASTRUCTURE.md](./docs/TECH_INFRASTRUCTURE.md))
 
 | Layer | Choice |
 |---|---|
