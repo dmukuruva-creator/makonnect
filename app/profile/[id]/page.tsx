@@ -30,35 +30,55 @@ export default async function ProfilePage({
   if (!member) notFound();
 
   const familyOnly = member.isMinor || member.visibility === "family-only";
+  const avatarInitials = member.name
+    .split(" ")
+    .map((p) => p[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
 
   return (
-    <article className="mx-auto max-w-2xl">
-      <Link href="/directory" className="text-sm text-secondary hover:underline">
+    <article className="animate-fade-up mx-auto max-w-2xl">
+      <Link
+        href="/directory"
+        className="inline-flex items-center gap-1.5 rounded-pill bg-surface px-3 py-1.5 text-sm font-semibold text-secondary shadow-soft ring-1 ring-tint/40 transition-colors hover:bg-tint/30"
+      >
         ← Back to directory
       </Link>
 
-      <header className="mt-4">
-        <h1 className="text-2xl font-bold text-text">{member.name}</h1>
-        <p className="mt-1 text-text/70">{member.headline}</p>
-        <p className="mt-1 text-sm text-text/60">
-          Cohort {member.cohort} · {member.location}
-        </p>
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {member.fields.map((f) => (
-            <span
-              key={f}
-              className="rounded-full bg-primary/15 px-2.5 py-0.5 text-xs text-secondary"
-            >
-              {f}
-            </span>
-          ))}
+      <header className="mt-5 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+        <span
+          aria-hidden
+          className="grid h-20 w-20 shrink-0 place-items-center rounded-3xl bg-gradient-to-br from-secondary to-[#5e3d18] font-display text-2xl font-black text-bg shadow-lift ring-4 ring-bg"
+        >
+          {avatarInitials}
+        </span>
+        <div>
+          <h1 className="text-3xl font-black tracking-tight text-text">
+            {member.name}
+          </h1>
+          <p className="mt-1 text-text/70">{member.headline}</p>
+          <p className="mt-1 text-sm font-medium text-text/55">
+            Cohort {member.cohort} · {member.location}
+          </p>
         </div>
       </header>
 
+      <div className="mt-4 flex flex-wrap gap-1.5">
+        {member.fields.map((f) => (
+          <span
+            key={f}
+            className="rounded-pill bg-primary/15 px-3 py-1 text-xs font-semibold text-secondary"
+          >
+            {f}
+          </span>
+        ))}
+      </div>
+
       {familyOnly && (
-        <div className="mt-6 rounded-lg border border-gold/40 bg-gold/10 p-4 text-sm text-secondary">
-          <p className="font-semibold">Family-only profile</p>
-          <p className="mt-1 text-text/75">
+        <div className="mt-6 rounded-card border border-gold/40 bg-gold/10 p-5 text-sm text-secondary shadow-soft">
+          <p className="font-bold">🛡️ Family-only profile</p>
+          <p className="mt-1.5 text-text/75">
             This is a current student. Their profile is visible only to the
             MakoZim family with guardian consent, and is never listed in the
             public directory. Economic and aid information is staff-only and is
@@ -67,23 +87,23 @@ export default async function ProfilePage({
         </div>
       )}
 
-      <section className="mt-6">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-secondary">
+      <section className="mt-7 rounded-card bg-surface p-5 shadow-soft ring-1 ring-tint/40 sm:p-6">
+        <h2 className="text-xs font-bold uppercase tracking-wide text-secondary">
           About
         </h2>
-        <p className="mt-2 text-text/80">{member.bio}</p>
+        <p className="mt-2 leading-relaxed text-text/80">{member.bio}</p>
       </section>
 
-      <section className="mt-8">
-        <h2 className="text-sm font-semibold uppercase tracking-wide text-secondary">
+      <section className="mt-6 rounded-card bg-surface p-5 shadow-soft ring-1 ring-tint/40 sm:p-6">
+        <h2 className="text-xs font-bold uppercase tracking-wide text-secondary">
           Journey
         </h2>
-        <div className="mt-3">
+        <div className="mt-4">
           <Timeline milestones={member.journey} />
         </div>
       </section>
 
-      <section className="mt-8 rounded-lg border border-tint/60 bg-white/40 p-4">
+      <section className="mt-6 rounded-card bg-gradient-to-br from-surface to-surface-2 p-5 shadow-soft ring-1 ring-tint/40 sm:p-6">
         {familyOnly ? (
           <p className="text-sm text-text/70">
             Direct messaging is disabled for students. Mentorship with a student
@@ -102,9 +122,12 @@ export default async function ProfilePage({
             <button
               type="button"
               disabled
-              className="mt-3 cursor-not-allowed rounded-lg bg-primary/40 px-4 py-2 text-sm font-semibold text-text/60"
+              className="mt-4 inline-flex cursor-not-allowed items-center gap-2 rounded-pill bg-primary/40 px-5 py-2.5 text-sm font-bold text-text/60"
             >
-              Request mentorship (coming in Phase 2)
+              🤝 Request mentorship
+              <span className="rounded-pill bg-bg/40 px-2 py-0.5 text-xs">
+                Phase 2
+              </span>
             </button>
           </div>
         ) : (

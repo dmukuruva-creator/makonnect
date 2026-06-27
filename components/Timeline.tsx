@@ -6,18 +6,29 @@ export default function Timeline({
   milestones: JourneyMilestone[];
 }) {
   return (
-    <ol className="relative ml-3 border-l border-tint">
+    <ol className="relative ml-3 pl-6">
+      {/* Animated rail that draws itself in from the top. */}
+      <span
+        aria-hidden
+        className="animate-draw absolute left-0 top-1 h-[calc(100%-0.5rem)] w-0.5 rounded-full bg-gradient-to-b from-primary via-tint to-transparent"
+      />
       {milestones.map((m, i) => (
-        <li key={`${m.year}-${i}`} className="mb-6 ml-6 last:mb-0">
+        <li
+          key={`${m.year}-${i}`}
+          className="animate-fade-up relative mb-7 last:mb-0"
+          style={{ ["--delay" as string]: `${i * 110 + 200}ms` }}
+        >
           <span
             aria-hidden
-            className="absolute -left-[7px] mt-1.5 h-3 w-3 rounded-full bg-primary ring-4 ring-bg"
+            className="absolute -left-[1.6rem] top-1 grid h-3.5 w-3.5 place-items-center rounded-full bg-primary ring-4 ring-surface"
           />
-          <p className="text-xs font-semibold uppercase tracking-wide text-secondary">
+          <p className="text-xs font-bold uppercase tracking-wide text-secondary">
             {m.year}
           </p>
-          <p className="font-medium text-text">{m.title}</p>
-          <p className="text-sm text-text/70">{m.detail}</p>
+          <p className="mt-0.5 font-bold text-text">{m.title}</p>
+          <p className="mt-0.5 text-sm leading-relaxed text-text/70">
+            {m.detail}
+          </p>
         </li>
       ))}
     </ol>

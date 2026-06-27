@@ -13,12 +13,17 @@ export default function DirectoryPage() {
 
   return (
     <div>
-      <header className="mb-6">
-        <h1 className="text-2xl font-bold text-text">Directory</h1>
-        <p className="mt-1 text-text/70">
-          Find an alum who walked your path. Students don&apos;t appear here —
-          their profiles are family-only and mentorship is arranged through
-          staff.
+      <header className="animate-fade-up mb-6">
+        <span className="inline-flex items-center gap-2 rounded-pill bg-primary/15 px-3 py-1 text-sm font-bold text-secondary">
+          🌍 Alumni & staff
+        </span>
+        <h1 className="mt-3 text-3xl font-black tracking-tight text-text">
+          Find your person
+        </h1>
+        <p className="mt-1.5 max-w-2xl text-text/70">
+          Search alumni and staff who&apos;ve walked your path. Students
+          don&apos;t appear here — their profiles are family-only and mentorship
+          is arranged through staff.
         </p>
       </header>
       <DirectoryClient members={members} />

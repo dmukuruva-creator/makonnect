@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
 /*
- * MaKonnect brand tokens — locked palette (HANDOFF.md §A).
- * Use the semantic tokens at call sites (e.g. bg-primary), not raw hex.
+ * MaKonnect design system — "Friendly & Rounded".
+ * Brand palette is locked (HANDOFF.md §A); everything else here builds a warm,
+ * cozy, approachable feel on top of it. Use semantic tokens at call sites
+ * (bg-primary, rounded-card, shadow-soft, animate-fade-up…), not raw hex.
+ *
+ * Connectivity note: motion is 100% CSS (no JS animation lib) so the bundle
+ * stays light for students on slow connections. All motion is gated behind
+ * prefers-reduced-motion.
  */
 :root {
   --color-primary: #bac132; /* olive-green / accent */
@@ -11,6 +17,18 @@
   --color-tint: #d6bead; /* beige */
   --color-bg: #f8f9eb; /* cream */
   --color-text: #1f2124; /* softened near-black */
+
+  /* Warm surface system — solid warm whites read far cozier than white/40
+   * floated over cream (which looks muddy). */
+  --color-surface: #fffdf6; /* card surface — warm paper white */
+  --color-surface-2: #fbf6e9; /* slightly deeper warm panel */
+
+  /* Soft, pillowy shadows tinted with the brown brand color (never grey). */
+  --shadow-soft: 0 2px 8px -2px rgb(128 85 34 / 0.10),
+    0 6px 20px -6px rgb(128 85 34 / 0.12);
+  --shadow-lift: 0 8px 18px -6px rgb(128 85 34 / 0.18),
+    0 18px 40px -12px rgb(128 85 34 / 0.18);
+  --shadow-glow: 0 6px 24px -4px rgb(186 193 50 / 0.45);
 }
 
 @theme inline {
@@ -20,13 +38,126 @@
   --color-tint: var(--color-tint);
   --color-bg: var(--color-bg);
   --color-text: var(--color-text);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Rounded, friendly radii. */
+  --radius-card: 1.25rem; /* 20px — default card */
+  --radius-pill: 999px;
+
+  --shadow-soft: var(--shadow-soft);
+  --shadow-lift: var(--shadow-lift);
+  --shadow-glow: var(--shadow-glow);
+
+  /* Display = Nunito (rounded terminals, friendly). Body = Plus Jakarta Sans. */
+  --font-sans: var(--font-jakarta);
+  --font-display: var(--font-nunito);
 }
 
 body {
   background: var(--color-bg);
   color: var(--color-text);
-  font-family: var(--font-sans), system-ui, Arial, Helvetica, sans-serif;
+  font-family: var(--font-jakarta), system-ui, Arial, Helvetica, sans-serif;
+  /* Subtle warm radial wash so the cream never reads flat. */
+  background-image:
+    radial-gradient(60rem 40rem at 12% -8%, rgb(186 193 50 / 0.10), transparent 60%),
+    radial-gradient(48rem 36rem at 100% 0%, rgb(227 134 47 / 0.08), transparent 55%);
+  background-attachment: fixed;
+}
+
+/* Headings lean on the rounded display face by default. */
+h1, h2, h3 {
+  font-family: var(--font-nunito), var(--font-jakarta), system-ui, sans-serif;
+}
+
+/* ---------------------------------------------------------------------------
+ * Motion system — tasteful & subtle. All keyframes are disabled under
+ * prefers-reduced-motion (see guard at the bottom).
+ * ------------------------------------------------------------------------- */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pop-in {
+  0% { opacity: 0; transform: scale(0.94); }
+  60% { opacity: 1; transform: scale(1.02); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+@keyframes draw-line {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+/* Entrance helpers. Add `.animate-fade-up` and an inline --delay for stagger. */
+.animate-fade-up {
+  opacity: 0;
+  animation: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--delay, 0ms);
+}
+.animate-fade-in {
+  opacity: 0;
+  animation: fade-in 0.7s ease forwards;
+  animation-delay: var(--delay, 0ms);
+}
+.animate-pop-in {
+  opacity: 0;
+  animation: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: var(--delay, 0ms);
+}
+.animate-float {
+  animation: float-y 6s ease-in-out infinite;
+  animation-delay: var(--delay, 0ms);
+}
+
+/* Shimmer skeleton — used by loading.tsx surfaces. */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface-2);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 0.65),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+/* Animated draw for the timeline rail. */
+.animate-draw {
+  transform-origin: top;
+  animation: draw-line 0.9s ease forwards;
+}
+
+/* Respect the user's motion preference — kill all of it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .animate-fade-up,
+  .animate-fade-in,
+  .animate-pop-in {
+    opacity: 1 !important;
+  }
 }
