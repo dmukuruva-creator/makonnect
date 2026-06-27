@@ -1,0 +1,17 @@
+{
+  "name": "MaKonnect",
+  "short_name": "MaKonnect",
+  "description": "Mentorship-first network for the Makomborero family.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f9eb",
+  "theme_color": "#bac132",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ]
+}
