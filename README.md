@@ -15,6 +15,9 @@ pipeline works end-to-end — **with no real minors' data involved, by design.**
 > developers, MakoZim staff, legal/compliance and stakeholders), then
 > **[PROJECT_DESCRIPTION.md](./PROJECT_DESCRIPTION.md)** (full plan) and
 > **[TASK_LIST.md](./TASK_LIST.md)** (non-coding work & risks).
+> How we coordinate: **[COMMUNICATIONS.md](./COMMUNICATIONS.md)** (progress
+> reporting & the official channel) + the fortnightly
+> [progress-report template](./templates/progress-report.md).
 
 ## What's in v1
 
