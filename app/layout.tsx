@@ -1,15 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Nunito, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import SyntheticDataBanner from "@/components/SyntheticDataBanner";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Display face — rounded, warm, friendly (headings + the wordmark).
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin"],
+  weight: ["600", "700", "800", "900"],
+});
+// Body face — humanist, highly readable for long-form resources.
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -32,13 +39,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${nunito.variable} ${jakarta.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <ServiceWorkerRegister />
         <SyntheticDataBanner />
         <SiteHeader />
-        <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
+        <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:py-10">
           {children}
         </main>
         <SiteFooter />
