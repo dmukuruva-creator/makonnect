@@ -17,11 +17,10 @@ Ready-to-pick **coding** tasks for collaborators. (Non-coding/governance work an
 
 ## Ready now (unblocked)
 
-### D1 · Fix the live deployment 🟢 — *highest priority*
-The app **is** deployed and public at **`https://makonnect.vercel.app`**, but two things are wrong (Vercel dashboard, not code):
-- **Production is stale** — it isn't serving the latest `main` (an unknown profile id returns `200` instead of the current code's `404`). Make production auto-deploy from `main`, then redeploy.
-- **The branch alias `…-git-main-…` is behind Vercel Authentication** — that's the URL that got shared; it redirects to a login. Stop sharing it; standardise on `makonnect.vercel.app` (or disable Deployment Protection if the branch alias must be shareable).
-**Done when:** `makonnect.vercel.app` serves the current `main` (bogus id → 404), is publicly reachable, and every PR still gets a preview deploy.
+### D1 · Live-deployment hygiene 🟢
+The app is deployed and public at **`https://makonnect.vercel.app`**, serving current `main`. Remaining (Vercel dashboard, not code):
+- **Standardise on the public URL.** The `…-git-main-…` branch alias is behind Vercel Deployment Protection (redirects to login) — stop sharing it; use `makonnect.vercel.app` everywhere, or disable Deployment Protection if that alias must be shareable.
+- **(Done on this branch) Stale-in-browser fix** — the old cache-first service worker was replaced with a network-first, versioned `sw.js`; returning visitors now get fresh content and self-heal. Nothing further needed here.
 **Note:** the project sits on a **personal** Vercel/GitHub account — migrating to an org is D2.
 
 ### D3 · Phase −1 contributor backbone 🟡 🛡
