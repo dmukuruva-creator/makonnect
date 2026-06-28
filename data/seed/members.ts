@@ -22,6 +22,7 @@ export const SEED_MEMBERS: Member[] = [
     fields: ["Software Engineering", "Computer Science", "Fintech"],
     offersMentorship: true,
     seekingMentorship: false,
+    openTo: ["Mentoring", "Hiring", "Reconnecting"],
     bio: "Went from O-Levels in Marondera to building payments infrastructure. Happy to talk through CS degrees, internships and the move abroad.",
     journey: [
       { year: "2014", title: "Makomborero intake", detail: "Joined the programme after primary school." },
@@ -41,6 +42,7 @@ export const SEED_MEMBERS: Member[] = [
     fields: ["Medicine", "Public Health", "Sciences"],
     offersMentorship: true,
     seekingMentorship: false,
+    openTo: ["Mentoring", "Reconnecting"],
     bio: "Doctor working in public health in Harare. Mentor me if you're weighing medicine vs other sciences, or navigating med-school applications.",
     journey: [
       { year: "2012", title: "Makomborero intake", detail: "Joined from Mutare." },
@@ -60,6 +62,7 @@ export const SEED_MEMBERS: Member[] = [
     fields: ["Data Science", "Statistics", "Economics"],
     offersMentorship: true,
     seekingMentorship: false,
+    openTo: ["Mentoring", "Collaborating", "Reconnecting"],
     bio: "Numbers person turned NGO data analyst. Ask me about statistics, scholarships across Africa, and working in the development sector.",
     journey: [
       { year: "2015", title: "Makomborero intake", detail: "Joined from Bulawayo." },
@@ -79,6 +82,7 @@ export const SEED_MEMBERS: Member[] = [
     fields: ["Mechanical Engineering", "Manufacturing"],
     offersMentorship: true,
     seekingMentorship: false,
+    openTo: ["Mentoring", "Hiring", "Reconnecting"],
     bio: "Mechanical engineer in the UK automotive sector. Diaspora applications, UCAS, and engineering foundation years are my home turf.",
     journey: [
       { year: "2013", title: "Makomborero intake", detail: "Joined from Gweru." },
@@ -98,6 +102,7 @@ export const SEED_MEMBERS: Member[] = [
     fields: ["Accounting", "Finance", "Commerce"],
     offersMentorship: true,
     seekingMentorship: true,
+    openTo: ["Mentoring", "Collaborating", "Reconnecting"],
     bio: "Chartered accountant in training. I mentor on commerce subjects and budgeting on a student stipend — and I'm still learning from senior alumni too.",
     journey: [
       { year: "2016", title: "Makomborero intake", detail: "Joined from Chinhoyi." },
@@ -117,6 +122,7 @@ export const SEED_MEMBERS: Member[] = [
     fields: ["Education", "Mathematics"],
     offersMentorship: true,
     seekingMentorship: false,
+    openTo: ["Mentoring", "Reconnecting"],
     bio: "Maths teacher who came up through Makomborero. I love demystifying A-Level maths and the road into teaching.",
     journey: [
       { year: "2011", title: "Makomborero intake", detail: "Joined from Hwange." },
@@ -170,6 +176,7 @@ export const SEED_MEMBERS: Member[] = [
     fields: ["Safeguarding", "Programme Coordination"],
     offersMentorship: false,
     seekingMentorship: false,
+    openTo: ["Reconnecting"],
     bio: "Coordinates the mentorship programme and oversees safeguarding sign-off. (Synthetic placeholder for the co-management / DSL role.)",
     journey: [
       { year: "Staff", title: "Programme coordination", detail: "Co-approves mentorship matches." },

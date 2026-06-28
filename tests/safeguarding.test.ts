@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getDirectoryMembers, getMember } from "@/lib/data";
+import { getCampaigns, getDirectoryMembers, getMember } from "@/lib/data";
 import { SEED_MEMBERS } from "@/data/seed/members";
 
 /**
@@ -67,6 +67,50 @@ describe("safeguarding: students exist but are gated, not orphaned", () => {
   it("a student profile is still individually fetchable (so it is not orphaned)", () => {
     for (const s of students) {
       expect(getMember(s.id)).toBeDefined();
+    }
+  });
+});
+
+describe("safeguarding: giving campaigns never identify a minor", () => {
+  // Beneficiaries are ALWAYS aggregate cohorts (§2B). No campaign may name a
+  // minor or target an individual member record.
+  const campaigns = getCampaigns();
+  const minors = SEED_MEMBERS.filter((m) => m.isMinor);
+  const minorTokens = minors
+    .flatMap((m) => m.name.split(/\s+/))
+    .map((t) => t.replace(/[^A-Za-z]/g, ""))
+    .filter((t) => t.length >= 3); // e.g. "Anesu", "Rutendo" (drops "K.", "M.")
+
+  it("seed actually contains minors to test against (sanity)", () => {
+    expect(minors.length).toBeGreaterThan(0);
+    expect(minorTokens.length).toBeGreaterThan(0);
+  });
+
+  it("no campaign text mentions a minor by name", () => {
+    for (const c of campaigns) {
+      const haystack = [
+        c.title,
+        c.summary,
+        c.organiser,
+        c.beneficiaryCohort,
+        c.missTargetNote,
+        ...c.body,
+      ]
+        .join(" ")
+        .toLowerCase();
+      for (const token of minorTokens) {
+        expect(
+          haystack.includes(token.toLowerCase()),
+          `campaign "${c.slug}" mentions minor token "${token}"`,
+        ).toBe(false);
+      }
+    }
+  });
+
+  it("no campaign beneficiary is an individual member id (beneficiaries are aggregate)", () => {
+    const ids = new Set(SEED_MEMBERS.map((m) => m.id));
+    for (const c of campaigns) {
+      expect(ids.has(c.beneficiaryCohort), c.slug).toBe(false);
     }
   });
 });

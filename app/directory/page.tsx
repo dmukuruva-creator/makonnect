@@ -4,7 +4,8 @@ import { getDirectoryMembers } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Directory",
-  description: "Search Makomborero alumni and staff who offer mentorship.",
+  description:
+    "The Makomborero alumni & staff network — connect with peers, offer or find mentorship.",
 };
 
 export default function DirectoryPage() {
@@ -18,12 +19,14 @@ export default function DirectoryPage() {
           🌍 Alumni & staff
         </span>
         <h1 className="mt-3 text-3xl font-black tracking-tight text-text">
-          Find your person
+          The alumni network
         </h1>
         <p className="mt-1.5 max-w-2xl text-text/70">
-          Search alumni and staff who&apos;ve walked your path. Students
-          don&apos;t appear here — their profiles are family-only and mentorship
-          is arranged through staff.
+          Connect with alumni and staff, see what each is{" "}
+          <span className="font-semibold text-secondary">open to</span> —
+          mentoring, hiring, collaborating, reconnecting — and find someone
+          who&apos;s walked your path. Students don&apos;t appear here: their
+          profiles are family-only and mentorship is arranged through staff.
         </p>
       </header>
       <DirectoryClient members={members} />

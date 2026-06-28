@@ -18,6 +18,14 @@ Everything that needs a **decision, sign-off, or answer from someone other than 
 
 ---
 
+## 🔺 Next-meeting triage (demo decisions)
+
+The demo now showcases the fuller interconnectivity story — bring these to the next meeting:
+- [ ] 🟠 **Confirm the demo-only, link-out giving approach** is the right interim: campaign UI in-app, but the **Give** button links out to a named processor (Paynow/EcoCash) and **no money moves in MaKonnect**. This respects the gates while letting fundraising be shown to donors now.
+- [ ] 🟠 **Pick the first payment rail** to feature (Paynow vs EcoCash) — needed before any real pipeline; the demo currently shows both.
+- [ ] 🟢 **Reconfirm the real-pipeline gates** stay in force (legal entity, named reconciler, regulatory check) before any in-app money movement — see §1, §7. The demo does **not** pre-empt these.
+- [ ] 🟢 **FYI — alum↔alum connection** is now illustrated in the directory/profiles (open-to intents + a disabled Connect control). Real, auth-gated connecting/messaging is still Phase 2; no behaviour change for minors.
+
 ## 1 · MakoZim leadership / board — approvals
 
 - [ ] 🔴 The three sign-offs above (public repo · minors'-data app · donations).

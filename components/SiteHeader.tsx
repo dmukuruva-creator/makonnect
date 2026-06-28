@@ -7,6 +7,7 @@ import { useState } from "react";
 const NAV = [
   { href: "/directory", label: "Directory" },
   { href: "/resources", label: "Resources" },
+  { href: "/campaigns", label: "Campaigns" },
 ];
 
 function isActive(pathname: string, href: string): boolean {

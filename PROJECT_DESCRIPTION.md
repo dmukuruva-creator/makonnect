@@ -133,6 +133,12 @@ The genuinely shippable v1 — *invite-only accounts + profiles + searchable dir
 
 > **Frame v1 as the on-ramp to mentorship (§2A.8).** The directory and profiles are the *first build*, but the reason-to-open is connection: *"hear from / reach someone who got where you're trying to go."* v1 copy, profile design ("open to mentoring," "ask me about…"), and the empty states should all point toward the mentorship loop that lands in Phase 2 — otherwise v1 is plumbing for a value nobody scoped. The directory is **how**, mentorship is **why**.
 
+> **Demo scope update (2026-06-27).** To show the full *interconnectivity* story to stakeholders, the live demo now **illustrates** two features ahead of their real build — on synthetic data, without reversing the safeguarding sequencing below:
+> - **Alum↔alum connection** — the directory and profiles now frame *peer networking* (an "open to…" intent signal and a non-functional **Connect** control), not only alum→student mentorship. Real connecting/messaging still lands in **Phase 2** behind auth (§3.3).
+> - **Alumni-directed giving** — a **demo-only campaign UI** (campaign cards, progress, and a **link-out** to a named processor) showcases §3.12. **No money moves in-app**; real capture/reconciliation stays gated on the legal entity, named reconciler, and regulatory checks (§3.12, §7). On the next-meeting triage list.
+>
+> Minors are unaffected by both: still family-only, never in the directory, and **never named in a campaign** (beneficiaries are aggregate cohorts only).
+
 ### 3.1 Accounts, Identity & Roles
 - Email/phone sign-up & login; password reset. Phone-first (many students lack reliable email).
 - **Role-based access** (student, alumni, staff/admin, donor) gating navigation and permissions. Roles are assigned, never self-selected.

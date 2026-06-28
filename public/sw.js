@@ -15,6 +15,7 @@ const APP_SHELL = [
   "/",
   "/directory",
   "/resources",
+  "/campaigns",
   "/manifest.webmanifest",
   "/icon.svg",
 ];

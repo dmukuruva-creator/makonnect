@@ -1,6 +1,7 @@
+import { SEED_CAMPAIGNS } from "@/data/seed/campaigns";
 import { SEED_MEMBERS } from "@/data/seed/members";
 import { SEED_RESOURCES } from "@/data/seed/resources";
-import type { Member, Resource } from "@/lib/types";
+import type { Campaign, Member, Resource } from "@/lib/types";
 
 /**
  * v1 data access layer.
@@ -37,4 +38,17 @@ export function getResource(slug: string): Resource | undefined {
 
 export function getAllResourceSlugs(): string[] {
   return SEED_RESOURCES.map((r) => r.slug);
+}
+
+/** Alumni-directed giving campaigns (§3.12). Demo: link-out only, no real money. */
+export function getCampaigns(): Campaign[] {
+  return SEED_CAMPAIGNS;
+}
+
+export function getCampaign(slug: string): Campaign | undefined {
+  return SEED_CAMPAIGNS.find((c) => c.slug === slug);
+}
+
+export function getAllCampaignSlugs(): string[] {
+  return SEED_CAMPAIGNS.map((c) => c.slug);
 }
