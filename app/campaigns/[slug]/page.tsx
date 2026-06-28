@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProgressBar from "@/components/ProgressBar";
+import ShareButton from "@/components/ShareButton";
 import { usd } from "@/components/CampaignCard";
 import { getAllCampaignSlugs, getCampaign } from "@/lib/data";
 
@@ -99,6 +100,9 @@ export default async function CampaignPage({
           Opens {c.processor} — the receipt comes from {c.processor}, not
           MaKonnect. No card details touch our system.
         </p>
+        <div className="mt-4 flex justify-center border-t border-tint/40 pt-4">
+          <ShareButton title={`Back this campaign: ${c.title}`} />
+        </div>
       </section>
 
       <section className="mt-6 rounded-card bg-surface p-5 shadow-soft ring-1 ring-tint/40 sm:p-6">
