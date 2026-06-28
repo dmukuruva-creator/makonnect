@@ -53,10 +53,10 @@ Searchable, filterable list of directory-visible members. Free-text search (name
 Per-member page: bio, role, cohort, location, fields, mentorship flags, an "open to…" line + a (disabled, Phase-2) **Connect** control for adults (F21), and a vertical journey timeline. Static-rendered per id. **Test:** every member id resolves; timeline renders; an adult shows Connect/mentorship controls; a minor's profile shows the family-only gate (F7) and **no Connect/Give**, not open contact.
 
 ### F5 · Resources Hub (read)
-List of alumni guides across College Apps / Finances / Networking / Relationships; each opens a static, offline-readable article (title, author, read-time, body). Currently **5 seed guides**. **Test:** a card opens its full article; categories render. *(Covered by `e2e/resources.spec.ts`.)* ⏳ **Not yet:** bookmarking, WhatsApp share, staff-review workflow, the 15–30 launch guides.
+List of alumni guides across College Apps / Finances / Networking / Relationships; each opens a static, offline-readable article (title, author, read-time, body) with a **share-to-WhatsApp** button (the reach layer, §2A.3). Currently **5 seed guides**. **Test:** a card opens its full article; categories render. *(Covered by `e2e/resources.spec.ts`.)* ⏳ **Not yet:** bookmarking, staff-review workflow, the 15–30 launch guides.
 
 ### F6 · PWA / offline reads
-Web manifest + installable; cache-first service worker serving the app shell and Resources Hub offline. **Reads only** — no offline write-queue in v1 (deliberate, [§3.10](../PROJECT_DESCRIPTION.md#310-offline-capability--v1-but-read-only-caching-only)). ⏳ **Not yet:** visible offline indicator, low-data-mode toggle.
+Web manifest + installable; **network-first** service worker (fresh online, cached pages offline) + a **visible offline indicator**. **Reads only** — no offline write-queue in v1 (deliberate, [§3.10](../PROJECT_DESCRIPTION.md#310-offline-capability--v1-but-read-only-caching-only)). ⏳ **Not yet:** low-data-mode toggle.
 
 ### F7 · Safeguarding model (data layer) 🛡
 The foundational safety guarantees, enforced in the type/data layer so they can't be bypassed by the UI:
