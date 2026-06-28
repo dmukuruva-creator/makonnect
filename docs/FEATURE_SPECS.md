@@ -67,7 +67,7 @@ The foundational safety guarantees, enforced in the type/data layer so they can'
 **Test:** the unit + e2e safeguarding suites are the spec — `tests/safeguarding.test.ts` and `e2e/safeguarding.spec.ts`. Any change that lets a minor surface in the directory must fail CI.
 
 ### F8 · Synthetic seed data
-~9 members (alumni, student-minors, staff) + 5 resources + 3 campaigns, in `data/seed/`. The only data in dev. ⏳ **Grow toward** ~30 members + 15–30 guides for an anti-cold-start demo.
+~15 members (12 alumni, 2 student-minors, 1 staff) + 9 resources + 4 campaigns, in `data/seed/`. The only data in dev — kept varied (fields, locations, cohorts, intents) to fight cold-start (R7) so the demo looks alive. ⏳ **Grow toward** ~30 members + 15–30 guides at launch.
 
 ### F21 · Alum↔alum connection demo 🛡
 Reframes the network as peer-to-peer, not only alum→student. Adults carry an `openTo` intent set (Mentoring / Hiring / Collaborating / Investing / Reconnecting) shown as chips on cards and profiles, a directory **"open to" filter**, and a **disabled "Connect" control** (labelled Phase 2 — illustrative, like the mentorship CTA). **Adult↔adult only:** minors carry no intents and show **no Connect** control. **Test:** the open-to filter narrows results; an alum profile shows Connect; a minor profile shows neither Connect nor Give. *(Covered by `e2e/connection.spec.ts`.)*

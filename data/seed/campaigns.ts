@@ -76,4 +76,26 @@ export const SEED_CAMPAIGNS: Campaign[] = [
       "Demo campaign on synthetic data; no real money moved through MaKonnect.",
     ],
   },
+  {
+    slug: "stem-lab-equipment",
+    title: "STEM lab equipment for the science cohort",
+    summary:
+      "Microscopes, glassware and reagents so practical science lessons run for the next intake — opening soon.",
+    organiser: "Ruvarashe Chiweshe",
+    beneficiaryCohort: "the incoming sciences cohort (aggregate)",
+    goalUsd: 5000,
+    raisedUsd: 0,
+    contributors: 0,
+    deadline: "2026-10-15",
+    status: "upcoming",
+    processor: "Paynow",
+    processorUrl: "https://www.paynow.co.zw/",
+    missTargetNote:
+      "This campaign hasn't opened yet. When it does, anything short of the target buys whichever equipment the amount covers, prioritised by the science staff.",
+    body: [
+      "Practical science is hard to teach without working equipment. This campaign re-stocks the lab so the next cohort gets hands-on lessons, not just diagrams.",
+      "Opening soon — shown here to illustrate an upcoming campaign in the demo. Equipment will be sourced and verified by alumni, then handed over by staff.",
+      "Demo campaign on synthetic data: no real money moves through MaKonnect.",
+    ],
+  },
 ];
