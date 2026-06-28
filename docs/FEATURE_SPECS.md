@@ -56,13 +56,13 @@ Per-member page: bio, role, cohort, location, fields, mentorship flags, an "open
 List of alumni guides across College Apps / Finances / Networking / Relationships; each opens a static, offline-readable article (title, author, read-time, body) with a **share-to-WhatsApp** button (the reach layer, §2A.3). Currently **5 seed guides**. **Test:** a card opens its full article; categories render. *(Covered by `e2e/resources.spec.ts`.)* ⏳ **Not yet:** bookmarking, staff-review workflow, the 15–30 launch guides.
 
 ### F6 · PWA / offline reads
-Web manifest + installable; **network-first** service worker (fresh online, cached pages offline) + a **visible offline indicator**. **Reads only** — no offline write-queue in v1 (deliberate, [§3.10](../PROJECT_DESCRIPTION.md#310-offline-capability--v1-but-read-only-caching-only)). ⏳ **Not yet:** low-data-mode toggle.
+Web manifest + installable; **network-first** service worker (fresh online, cached pages offline) + a **visible offline indicator**. **Reads only** — no offline write-queue in v1 (deliberate, [§3.10](../PROJECT_DESCRIPTION.md#310-offline-capability--v1-but-read-only-caching-only)). 🛡 **Privacy-scoped cache:** only learning content (Resources Hub) + app chrome + build assets may persist on-device; the **directory, profiles (incl. minors) and campaigns are network-only and never written to disk** ([public/offline-cache-policy.js](../public/offline-cache-policy.js), locked by `tests/offline-privacy.test.ts`). ⏳ **Not yet:** low-data-mode toggle.
 
 ### F7 · Safeguarding model (data layer) 🛡
 The foundational safety guarantees, enforced in the type/data layer so they can't be bypassed by the UI:
 - Minors (`isMinor`) are **family-only** and **never** returned to the public directory.
 - Economic-vulnerability / aid status is **not modelled** into the public types at all (staff-only, lands behind Supabase RLS later).
-- A student profile is still individually fetchable (gated), so it isn't orphaned.
+- A student profile is still individually fetchable (gated), so it isn't orphaned — but it is **never persisted to the device cache** (F6 privacy policy), so it can't linger on a shared phone.
 
 **Test:** the unit + e2e safeguarding suites are the spec — `tests/safeguarding.test.ts` and `e2e/safeguarding.spec.ts`. Any change that lets a minor surface in the directory must fail CI.
 

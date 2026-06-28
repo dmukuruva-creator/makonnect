@@ -38,6 +38,7 @@ foundation. Already enforced in this slice:
 - **No donor→student messaging; no unsupervised adult→minor contact** — mentorship runs through staff-auditable channels.
 - **Campaigns name no minors** — beneficiaries are aggregate cohorts only, never an individual child.
 - **Economic-vulnerability / aid status is staff-only** — it isn't even modelled into public-facing types.
+- **Offline cache is privacy-scoped** — only learning content (the Resources Hub) and app chrome persist on-device; the directory and profiles (incl. minors) are never written to disk, so nothing personal lingers on a shared phone.
 - All development uses **synthetic data**; real records are imported by MakoZim staff only at the deployment phase.
 
 ## Tech stack (decided — see [docs/TECH_INFRASTRUCTURE.md](./docs/TECH_INFRASTRUCTURE.md))

@@ -1,24 +1,21 @@
-// MaKonnect service worker — NETWORK-FIRST reads, offline-capable.
+// MaKonnect service worker — NETWORK-FIRST reads, offline-capable, privacy-scoped.
 //
 // v1 offline goal (PROJECT_DESCRIPTION §3.10 / overview memory): the app stays
 // readable offline, but the live server is ALWAYS preferred while online, so a
 // new deploy is picked up immediately — no stale shell. Cache is a fallback,
 // never the source of truth. Reads only: no write-queue or background sync.
 //
-// This replaces an earlier cache-first worker whose hard-coded cache key pinned
-// returning visitors to an old shell forever. Bumping VERSION below purges that
-// cache on activate, so already-stuck browsers self-heal on their next visit.
+// SAFEGUARDING (§2B): only LEARNING content + neutral app chrome/build assets
+// may persist on-device. People & personal data (directory, profiles incl.
+// minors) and operational data (campaigns) are NEVER written to the cache — see
+// offline-cache-policy.js. Bumping VERSION purges any cache an older worker
+// wrote (incl. profiles cached by the v2 cache-everything worker) on activate.
+importScripts("/offline-cache-policy.js");
 
-const VERSION = "v2";
+const VERSION = "v3";
 const CACHE = `makonnect-${VERSION}`;
-const APP_SHELL = [
-  "/",
-  "/directory",
-  "/resources",
-  "/campaigns",
-  "/manifest.webmanifest",
-  "/icon.svg",
-];
+// Pre-cache learning content + chrome only — never the directory/profiles/campaigns.
+const APP_SHELL = ["/", "/resources", "/manifest.webmanifest", "/icon.svg"];
 
 self.addEventListener("install", (event) => {
   // Pre-cache the shell as an OFFLINE FALLBACK only, then take over at once.
@@ -33,8 +30,8 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async () => {
-      // Delete every cache that isn't the current version — this is what clears
-      // the old cache-first "makonnect-v1" shell that caused the staleness.
+      // Delete every cache that isn't the current version. This purges anything
+      // an older worker stored — including personal pages the v2 worker cached.
       const keys = await caches.keys();
       await Promise.all(
         keys.filter((key) => key !== CACHE).map((key) => caches.delete(key)),
@@ -68,20 +65,27 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  // Network-first: prefer the live server, refresh the cache, fall back to the
-  // cache (then the app shell) only when the network is unavailable.
+  // PRIVACY GATE: only learning content + chrome may ever touch the cache.
+  const cacheable = self.OFFLINE_CACHEABLE(url.pathname);
+
+  // Network-first. Cacheable responses are stored for offline reads; everything
+  // else (directory, profiles, campaigns) is fetched live and never persisted.
   event.respondWith(
     fetch(request)
       .then((response) => {
-        if (response.ok && response.type === "basic") {
+        if (cacheable && response.ok && response.type === "basic") {
           const copy = response.clone();
           caches.open(CACHE).then((cache) => cache.put(request, copy));
         }
         return response;
       })
       .catch(async () => {
-        const cached = await caches.match(request);
-        if (cached) return cached;
+        if (cacheable) {
+          const cached = await caches.match(request);
+          if (cached) return cached;
+        }
+        // Offline on a non-cached page: fall back to the neutral app shell —
+        // never serve a stale personal page from disk.
         if (request.mode === "navigate") {
           const shell = await caches.match("/");
           if (shell) return shell;
