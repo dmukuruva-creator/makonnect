@@ -2,19 +2,27 @@
 
 import { useMemo, useState } from "react";
 import MemberCard from "@/components/MemberCard";
-import type { Member } from "@/lib/types";
+import type { ConnectionIntent, Member } from "@/lib/types";
 
 type MentorshipFilter = "all" | "offers";
+type IntentFilter = "all" | ConnectionIntent;
 
 export default function DirectoryClient({ members }: { members: Member[] }) {
   const [query, setQuery] = useState("");
   const [field, setField] = useState("all");
   const [mentorship, setMentorship] = useState<MentorshipFilter>("all");
+  const [intent, setIntent] = useState<IntentFilter>("all");
 
   const fields = useMemo(() => {
     const set = new Set<string>();
     members.forEach((m) => m.fields.forEach((f) => set.add(f)));
     return ["all", ...Array.from(set).sort()];
+  }, [members]);
+
+  const intents = useMemo(() => {
+    const set = new Set<ConnectionIntent>();
+    members.forEach((m) => m.openTo?.forEach((i) => set.add(i)));
+    return ["all", ...Array.from(set).sort()] as IntentFilter[];
   }, [members]);
 
   const results = useMemo(() => {
@@ -29,19 +37,24 @@ export default function DirectoryClient({ members }: { members: Member[] }) {
       const matchesField = field === "all" || m.fields.includes(field);
       const matchesMentorship =
         mentorship === "all" || (mentorship === "offers" && m.offersMentorship);
-      return matchesQuery && matchesField && matchesMentorship;
+      const matchesIntent =
+        intent === "all" || (m.openTo?.includes(intent) ?? false);
+      return matchesQuery && matchesField && matchesMentorship && matchesIntent;
     });
-  }, [members, query, field, mentorship]);
+  }, [members, query, field, mentorship, intent]);
 
   const filtersActive =
-    query.trim() !== "" || field !== "all" || mentorship !== "all";
+    query.trim() !== "" ||
+    field !== "all" ||
+    mentorship !== "all" ||
+    intent !== "all";
 
   return (
     <div>
       {/* Search + filter bar — a single soft rounded panel. */}
       <div className="rounded-card bg-surface p-3 shadow-soft ring-1 ring-tint/40 sm:p-4">
-        <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center">
-          <div className="relative flex-1">
+        <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center">
+          <div className="relative flex-1 sm:min-w-[14rem]">
             <span
               aria-hidden
               className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-text/40"
@@ -66,6 +79,18 @@ export default function DirectoryClient({ members }: { members: Member[] }) {
             {fields.map((f) => (
               <option key={f} value={f}>
                 {f === "all" ? "All fields" : f}
+              </option>
+            ))}
+          </select>
+          <select
+            value={intent}
+            onChange={(e) => setIntent(e.target.value as IntentFilter)}
+            aria-label="Filter by what members are open to"
+            className="cursor-pointer rounded-pill border border-tint/60 bg-bg/60 px-4 py-2.5 font-medium text-text outline-none transition-colors focus:border-primary"
+          >
+            {intents.map((i) => (
+              <option key={i} value={i}>
+                {i === "all" ? "Open to anything" : `Open to ${i.toLowerCase()}`}
               </option>
             ))}
           </select>
@@ -98,6 +123,7 @@ export default function DirectoryClient({ members }: { members: Member[] }) {
               setQuery("");
               setField("all");
               setMentorship("all");
+              setIntent("all");
             }}
             className="rounded-pill px-3 py-1 text-sm font-semibold text-secondary transition-colors hover:bg-tint/40"
           >

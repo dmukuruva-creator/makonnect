@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import IntentChips from "@/components/IntentChips";
 import Timeline from "@/components/Timeline";
 import { getAllMemberIds, getMember } from "@/lib/data";
 
@@ -87,6 +88,16 @@ export default async function ProfilePage({
         </div>
       )}
 
+      {/* Peer-connection intents — adults only; minors never expose these. */}
+      {!familyOnly && member.openTo && member.openTo.length > 0 && (
+        <div className="mt-6 flex flex-wrap items-center gap-2">
+          <span className="text-xs font-bold uppercase tracking-wide text-secondary">
+            Open to
+          </span>
+          <IntentChips intents={member.openTo} />
+        </div>
+      )}
+
       <section className="mt-7 rounded-card bg-surface p-5 shadow-soft ring-1 ring-tint/40 sm:p-6">
         <h2 className="text-xs font-bold uppercase tracking-wide text-secondary">
           About
@@ -110,30 +121,43 @@ export default async function ProfilePage({
             is arranged and supervised by MakoZim staff — there are no
             unsupervised adult→minor channels.
           </p>
-        ) : member.offersMentorship ? (
+        ) : (
           <div>
             <p className="text-sm font-medium text-text">
-              {member.name.split(" ")[0]} offers mentorship.
+              Connect with {member.name.split(" ")[0]}
+              {member.offersMentorship ? " — open to mentoring, too." : "."}
             </p>
             <p className="mt-1 text-sm text-text/70">
-              In the full app, requests route through staff-auditable mentorship
-              channels. Messaging is not enabled in this synthetic demo.
+              In the full app, connecting
+              {member.offersMentorship ? " and mentorship requests" : ""} route
+              through staff-auditable channels. Messaging isn&apos;t enabled in
+              this synthetic demo.
             </p>
-            <button
-              type="button"
-              disabled
-              className="mt-4 inline-flex cursor-not-allowed items-center gap-2 rounded-pill bg-primary/40 px-5 py-2.5 text-sm font-bold text-text/60"
-            >
-              🤝 Request mentorship
-              <span className="rounded-pill bg-bg/40 px-2 py-0.5 text-xs">
-                Phase 2
-              </span>
-            </button>
+            <div className="mt-4 flex flex-wrap gap-3">
+              <button
+                type="button"
+                disabled
+                className="inline-flex cursor-not-allowed items-center gap-2 rounded-pill bg-secondary/40 px-5 py-2.5 text-sm font-bold text-bg/80"
+              >
+                🔗 Connect
+                <span className="rounded-pill bg-bg/30 px-2 py-0.5 text-xs">
+                  Phase 2
+                </span>
+              </button>
+              {member.offersMentorship && (
+                <button
+                  type="button"
+                  disabled
+                  className="inline-flex cursor-not-allowed items-center gap-2 rounded-pill bg-primary/40 px-5 py-2.5 text-sm font-bold text-text/60"
+                >
+                  🤝 Request mentorship
+                  <span className="rounded-pill bg-bg/40 px-2 py-0.5 text-xs">
+                    Phase 2
+                  </span>
+                </button>
+              )}
+            </div>
           </div>
-        ) : (
-          <p className="text-sm text-text/70">
-            This member isn&apos;t currently offering mentorship.
-          </p>
         )}
       </section>
     </article>

@@ -23,10 +23,11 @@ pipeline works end-to-end — **with no real minors' data involved, by design.**
 
 ## What's in v1
 
-- **Directory** — searchable, filterable list of alumni & staff who offer mentorship.
-- **Profiles** — bio + journey timeline for each member.
-- **Resources Hub** — static, offline-readable alumni advice (college apps, finances, networking, relationships).
-- **PWA** — installable, with a web manifest and a cache-first service worker (offline reads; no write-queue in v1).
+- **Directory** — searchable, filterable alumni & staff network: connect with peers (an "open to" signal), find or offer mentorship.
+- **Profiles** — bio + journey timeline, "open to…" intents, and a (Phase-2) Connect control for adults.
+- **Resources Hub** — static, offline-readable alumni advice (college apps, finances, networking, relationships), shareable to WhatsApp.
+- **Campaigns** *(demo)* — alumni-directed giving with progress and a link-out to a named processor (Paynow/EcoCash). No real money moves in-app.
+- **PWA** — installable, with a web manifest and a network-first service worker (offline reads; no write-queue in v1).
 
 ## Safeguarding, built in
 
@@ -35,7 +36,9 @@ foundation. Already enforced in this slice:
 
 - Students' profiles are **family-only** and never appear in the public directory.
 - **No donor→student messaging; no unsupervised adult→minor contact** — mentorship runs through staff-auditable channels.
+- **Campaigns name no minors** — beneficiaries are aggregate cohorts only, never an individual child.
 - **Economic-vulnerability / aid status is staff-only** — it isn't even modelled into public-facing types.
+- **Offline cache is privacy-scoped** — only learning content (the Resources Hub) and app chrome persist on-device; the directory and profiles (incl. minors) are never written to disk, so nothing personal lingers on a shared phone.
 - All development uses **synthetic data**; real records are imported by MakoZim staff only at the deployment phase.
 
 ## Tech stack (decided — see [docs/TECH_INFRASTRUCTURE.md](./docs/TECH_INFRASTRUCTURE.md))

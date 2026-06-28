@@ -68,7 +68,7 @@ The hard, high-value phases (auth, real data, mentorship, donations) haven't sta
 **Legend:** ✅ done · 🚧 in progress · ⏳ not started · ⛔ blocked on a non-code decision
 
 ### What's actually built today (synthetic data, no DB, no secrets)
-Home + hero · searchable/filterable **directory** · **profiles** with journey timeline · **Resources Hub** (list + article) · **PWA** (manifest + cache-first service worker) · safeguarding enforced in the type/data layer (minors are family-only and never directory-visible; no aid fields in the public model) · unit tests (data integrity + safeguarding) + Playwright e2e (directory, resources, safeguarding, navigation, mobile) · CI workflow. Detail per feature: [FEATURE_SPECS.md](./FEATURE_SPECS.md).
+Home + hero · searchable/filterable **directory** with **alum↔alum connection** framing (open-to intents + Connect CTA) · **profiles** with journey timeline · **Resources Hub** (list + article) · **demo Campaigns** surface (alumni-directed giving, link-out, no real money) · **PWA** (manifest + network-first service worker) · safeguarding enforced in the type/data layer (minors are family-only and never directory-visible; never named in a campaign; no aid fields in the public model) · unit tests (data integrity + safeguarding + campaigns) + Playwright e2e (directory, resources, safeguarding, navigation, mobile, connection, campaigns) · CI workflow. Detail per feature: [FEATURE_SPECS.md](./FEATURE_SPECS.md).
 
 ### Immediate next (unblocks the demo)
 1. **Standardise on the public URL** — the shared `-git-main-` alias is auth-walled; use `makonnect.vercel.app` everywhere — [DEV_TASKBOARD → D1](./DEV_TASKBOARD.md). *(Browser-staleness from the old service worker is now fixed.)*

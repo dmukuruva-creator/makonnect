@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ShareButton from "@/components/ShareButton";
 import { getAllResourceSlugs, getResource } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -46,6 +47,7 @@ export default async function ResourcePage({
         <p className="mt-2 text-sm font-medium text-text/55">
           {resource.author} · ⏱ {resource.readMinutes} min read
         </p>
+        <ShareButton title={resource.title} className="mt-4" />
       </header>
 
       <div className="mt-7 space-y-4 rounded-card bg-surface p-6 text-[1.05rem] leading-relaxed text-text/85 shadow-soft ring-1 ring-tint/40 sm:p-8">

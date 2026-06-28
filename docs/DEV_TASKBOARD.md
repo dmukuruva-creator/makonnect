@@ -57,5 +57,9 @@ Design the Postgres schema + Row-Level Security for student/alumni/staff/donor t
 
 ---
 
+## Recently shipped (demo, synthetic data)
+- **F21 · Alum↔alum connection demo** — directory "open to" filter + intent chips, a disabled Connect CTA on adult profiles. The *real*, auth-gated version is D7.
+- **F22 · Campaigns demo UI** — `/campaigns` list + detail with link-out giving (no real money). The *real* pipeline is D9 (still gated).
+
 ## Good first issues
 D4 (seed data) · D6 (share/bookmark) · empty-state polish on directory/hub · accessibility pass (focus states, alt text, reduced-motion) · a low-data placeholder image component. Pair these with a test.

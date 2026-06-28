@@ -24,7 +24,7 @@ test.describe("navigation & landing", () => {
       .click();
     await expect(page).toHaveURL(/\/directory$/);
     await expect(
-      page.getByRole("heading", { level: 1, name: /Find your person/i }),
+      page.getByRole("heading", { level: 1, name: /The alumni network/i }),
     ).toBeVisible();
   });
 

@@ -30,6 +30,9 @@ export default function SiteFooter() {
             <Link href="/resources" className="transition-colors hover:text-secondary">
               Resources
             </Link>
+            <Link href="/campaigns" className="transition-colors hover:text-secondary">
+              Campaigns
+            </Link>
           </nav>
         </div>
 

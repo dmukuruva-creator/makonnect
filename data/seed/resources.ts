@@ -82,4 +82,64 @@ export const SEED_RESOURCES: Resource[] = [
       "It is fine to choose a broad path now and specialise later. Few careers run in a straight line, and almost no one ends up exactly where they planned.",
     ],
   },
+  {
+    slug: "personal-statement-that-sounds-like-you",
+    title: "A personal statement that sounds like you",
+    category: "College Apps",
+    summary:
+      "How to write an essay that an admissions officer remembers — without exaggerating.",
+    author: "Nyasha Marufu (2014)",
+    readMinutes: 5,
+    body: [
+      "Admissions officers read thousands of essays. The ones that stand out are not the grandest — they are the most specific and the most honestly yours.",
+      "Start with a real moment, not a thesis. A single concrete scene from your life tells them more than a paragraph of adjectives about how hardworking you are.",
+      "Cut every sentence that could appear in anyone else's essay. If a line would be true of half your class, it is not earning its place.",
+      "Read the final version aloud. If it does not sound like how you actually talk about yourself, keep editing until it does.",
+    ],
+  },
+  {
+    slug: "managing-money-when-you-move-abroad",
+    title: "Managing money when you move abroad",
+    category: "Finances",
+    summary:
+      "Opening accounts, avoiding fees, and sending money home without losing a fortune.",
+    author: "Chipo Nyathi (2011)",
+    readMinutes: 5,
+    body: [
+      "The first month abroad is when costly money mistakes happen. A little setup beforehand saves you far more than it feels like at the time.",
+      "Open a local student bank account as early as you can — many waive fees for students, and paying in the local currency avoids constant conversion charges.",
+      "When you send money home, compare a couple of transfer services rather than defaulting to the first one. The difference in fees and rates adds up over a year.",
+      "Keep a small emergency fund in the local currency. Being stranded without access to cash in a new country is stressful and avoidable.",
+    ],
+  },
+  {
+    slug: "finding-a-mentor-who-actually-helps",
+    title: "Finding a mentor who actually helps",
+    category: "Networking",
+    summary:
+      "Turning a one-off conversation into guidance you can come back to.",
+    author: "Simbarashe Mhute (2013)",
+    readMinutes: 4,
+    body: [
+      "A good mentor is rarely the most famous person you can find — it is someone a few steps ahead who remembers what your stage felt like.",
+      "Ask for something small and specific first: fifteen minutes about one decision. It is easy to say yes to, and it lets both of you see if the fit is there.",
+      "Come prepared and do what you said you would. Mentors invest more in people who act on advice than in people who only collect it.",
+      "Keep them updated occasionally, even when you do not need anything. The relationships that last are the ones where you also share your wins.",
+    ],
+  },
+  {
+    slug: "staying-connected-to-home",
+    title: "Staying connected to home while you study",
+    category: "Relationships",
+    summary:
+      "Holding on to the people and identity that ground you when everything else changes.",
+    author: "Ruvarashe Chiweshe (2015)",
+    readMinutes: 4,
+    body: [
+      "Leaving for school or abroad can quietly loosen the ties that matter most. A little intention keeps them strong without much effort.",
+      "Set one small, regular rhythm with home — a weekly call, a shared photo — rather than waiting for a 'good time' that never quite comes.",
+      "Let the people back home in on the hard parts too, not just the highlights. Sharing the struggle is what keeps a relationship real across distance.",
+      "Stay rooted in who you are. The point of getting ahead is not to leave the family behind — it is to be able to reach back.",
+    ],
+  },
 ];

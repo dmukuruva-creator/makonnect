@@ -1,10 +1,12 @@
 import Link from "next/link";
-import { getDirectoryMembers, getResources } from "@/lib/data";
+import { getCampaigns, getDirectoryMembers, getResources } from "@/lib/data";
 import AvatarCluster from "@/components/AvatarCluster";
+import CampaignCard from "@/components/CampaignCard";
 
 export default function Home() {
   const members = getDirectoryMembers();
   const resources = getResources();
+  const campaigns = getCampaigns();
 
   return (
     <div className="space-y-20 sm:space-y-28">
@@ -96,48 +98,59 @@ export default function Home() {
         <h2 className="text-center text-2xl font-extrabold text-text">
           How MaKonnect works
         </h2>
-        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
             {
-              emoji: "🔎",
-              title: "Find your person",
-              body: "Search alumni and staff by field, country or cohort — the ones who walked your exact path.",
+              emoji: "🤝",
+              title: "Connect",
+              href: "/directory",
+              body: "Reconnect and network with alumni worldwide — see who's open to mentoring, hiring or collaborating.",
+            },
+            {
+              emoji: "🎓",
+              title: "Mentor",
+              href: "/directory",
+              body: "Alumni guide the students coming up behind them, through safe, staff-auditable channels.",
             },
             {
               emoji: "📖",
-              title: "Read the advice",
-              body: "Alumni pass back hard-won guidance on college apps, finances and life. Readable offline.",
+              title: "Learn",
+              href: "/resources",
+              body: "Hard-won advice on college apps, finances and life — readable offline when connectivity is poor.",
             },
             {
-              emoji: "🤝",
-              title: "Ask for mentorship",
-              body: "Reach out through staff-auditable channels — safe, supervised, and built around young people.",
+              emoji: "💛",
+              title: "Give",
+              href: "/campaigns",
+              body: "Back time-bound, transparent campaigns run by alumni for the family.",
             },
           ].map((step, i) => (
-            <div
+            <Link
               key={step.title}
-              className="animate-fade-up rounded-card bg-surface p-6 shadow-soft ring-1 ring-tint/40 transition-transform duration-300 hover:-translate-y-1"
+              href={step.href}
+              className="group animate-fade-up rounded-card bg-surface p-6 shadow-soft ring-1 ring-tint/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lift hover:ring-primary/50"
               style={{ ["--delay" as string]: `${i * 90}ms` }}
             >
               <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary/15 text-2xl">
                 {step.emoji}
               </div>
-              <h3 className="mt-4 text-lg font-extrabold text-text">
+              <h3 className="mt-4 text-lg font-extrabold text-text group-hover:text-secondary">
                 {step.title}
               </h3>
               <p className="mt-1.5 text-sm leading-relaxed text-text/70">
                 {step.body}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
 
       {/* ---- Stats -------------------------------------------------------- */}
-      <section className="grid gap-4 sm:grid-cols-3">
+      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[
           { stat: `${members.length}`, label: "alumni & staff in the directory" },
           { stat: `${resources.length}`, label: "advice pieces in the hub" },
+          { stat: `${campaigns.length}`, label: "giving campaigns (demo)" },
           { stat: "Synthetic", label: "data only — no real students" },
         ].map((card, i) => (
           <div
@@ -151,6 +164,35 @@ export default function Home() {
             <p className="mt-1.5 text-sm text-text/70">{card.label}</p>
           </div>
         ))}
+      </section>
+
+      {/* ---- Campaigns teaser --------------------------------------------- */}
+      <section>
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 className="text-2xl font-extrabold text-text">
+              Alumni-directed giving
+            </h2>
+            <p className="mt-1 max-w-xl text-sm text-text/70">
+              Time-bound, transparent campaigns run by alumni for the family — a
+              preview on synthetic data, with no real money moving in-app.
+            </p>
+          </div>
+          <Link
+            href="/campaigns"
+            className="group inline-flex items-center gap-1.5 rounded-pill bg-surface px-4 py-2 text-sm font-semibold text-secondary shadow-soft ring-1 ring-tint/40 transition-colors hover:bg-tint/30"
+          >
+            All campaigns
+            <span className="transition-transform duration-200 group-hover:translate-x-1">
+              →
+            </span>
+          </Link>
+        </div>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {campaigns.slice(0, 3).map((c, i) => (
+            <CampaignCard key={c.slug} campaign={c} index={i} />
+          ))}
+        </div>
       </section>
 
       {/* ---- Safeguarding promise ----------------------------------------- */}

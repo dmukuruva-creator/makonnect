@@ -1,4 +1,5 @@
 import Link from "next/link";
+import IntentChips from "@/components/IntentChips";
 import type { Member } from "@/lib/types";
 
 function initials(name: string): string {
@@ -75,6 +76,14 @@ export default function MemberCard({
           Offers mentorship
         </span>
       )}
+
+      {/* Peer-connection intents (excluding Mentoring, which the badge above
+          already conveys). Adult↔adult only — minors never carry intents. */}
+      <IntentChips
+        intents={member.openTo?.filter((i) => i !== "Mentoring")}
+        max={3}
+        className="mt-2.5"
+      />
     </Link>
   );
 }
